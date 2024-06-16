@@ -1,5 +1,6 @@
 package com.sena.back_1076502369.Controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,17 @@ public class SchedulesController extends ABaseController<Schedules, ISchedulesSe
         super(service, "Schedules");
     }
 
-    @GetMapping("/salidas")
+    @GetMapping("/salidas/")
     public ResponseEntity<ApiResponseDto<List<IVuelosDto>>> show(@RequestParam(required = false) String departure,
-            @RequestParam(required = false) String arrival, @RequestParam(required = false) Integer salida) {
+            @RequestParam(required = false) String arrival, @RequestParam(required = false) Date salida) {
         try {
-            
-            List<IVuelosDto> entity = service.getReserva(departure, arrival, salida);
-            return ResponseEntity.ok(new ApiResponseDto<List<IVuelosDto>>("Registro encontrado", entity, true));
+            if (departure == null || arrival == null || salida == null) {
+                return ResponseEntity.badRequest().body(
+                        new ApiResponseDto<>("Los valores de: departure, arrival, salida. Son nulos", null, false));
+            } else {
+                List<IVuelosDto> entity = service.getReserva(departure, arrival, salida);
+                return ResponseEntity.ok(new ApiResponseDto<>("Registro encontrado", entity, true));
+            }
         } catch (Exception e) {
             return ResponseEntity.internalServerError()
                     .body(new ApiResponseDto<List<IVuelosDto>>(e.getMessage(), null, false));

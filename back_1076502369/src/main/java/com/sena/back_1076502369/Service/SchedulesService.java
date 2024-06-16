@@ -1,5 +1,6 @@
 package com.sena.back_1076502369.Service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ public class SchedulesService  extends ABaseService<Schedules> implements ISched
     }
 
     @Override
-    public List<IVuelosDto> getReserva(String departure, String arrival, Integer salida) {
-        return getReserva(departure, arrival, salida);
+    public List<IVuelosDto> getReserva(String departure, String arrival, Date salida) {
+        return repository.getReserva(departure, arrival, salida);
     }
+
 }

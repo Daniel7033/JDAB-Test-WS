@@ -16,7 +16,7 @@ public class Schedules extends ABaseEntity{
     private Date date;
 
     @Column(name = "time")
-    private Integer time;
+    private String time;
 
     @Column(name = "economy_price")
     private Double economyPrice;
@@ -43,11 +43,11 @@ public class Schedules extends ABaseEntity{
         this.date = date;
     }
 
-    public Integer getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
