@@ -1,6 +1,5 @@
 package com.sena.back_1076502369.Entity;
 
-import java.sql.Time;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,14 +15,14 @@ public class Routes extends ABaseEntity{
     private Double distance;
 
     @Column(name = "flight_time")
-    private Time flighTime;
+    private Integer flighTime;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "departure_airport_id", nullable = false)
+    @JoinColumn(name = "departure_airport_id")
     private Airports departure;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "arrival_airport_id", nullable = false)
+    @JoinColumn(name = "arrival_airport_id")
     private Airports arrival;
 
     public Double getDistance() {
@@ -34,11 +33,11 @@ public class Routes extends ABaseEntity{
         this.distance = distance;
     }
 
-    public Time getFlighTime() {
+    public Integer getFlighTime() {
         return flighTime;
     }
 
-    public void setFlighTime(Time flighTime) {
+    public void setFlighTime(Integer flighTime) {
         this.flighTime = flighTime;
     }
 

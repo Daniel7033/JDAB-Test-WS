@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- Librerias -->
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Bootstrap -->
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/Reserva.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <!-- Enlaces -->
+    <!-- Script -->
+    <script src='../js/Reserva.js'></script>
+    <title>Confirmación de la reserva</title>
+</head>
+
+<body>
+    <div>
+        <p>Detalles del vuelo de salida</p>
+        <div class="salida">
+            <div class="input-group">
+                <div>
+                    <label class="col-form-label">Origen: </label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+                <div>
+                    <label class="col-form-label">Destino: </label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+                <div>
+                    <label class="col-form-label">Tipo de Cabina: </label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+                <div>
+                    <label class="col-form-label">Fecha: </label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+                <div>
+                    <label class="col-form-label">Número de vuelo: </label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+            </div>
+        </div><br><br>
+        <p>Detalles del vuelo de regreso</p>
+        <div class="regreso">
+            <div class="input-group">
+                <div>
+                    <label class="col-form-label">Origen: </label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+                <div>
+                    <label class="col-form-label">Destino: </label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+                <div>
+                    <label class="col-form-label">Tipo de Cabina: </label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+                <div>
+                    <label class="col-form-label">Fecha: </label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+                <div>
+                    <label class="col-form-label">Número de vuelo: </label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+            </div>
+        </div><br><br>
+        <p>Datos del pasajero:</p>
+        <div class="usuarios">
+            <form>
+                <fieldset>
+                    <div class="input-group">
+                        <div>
+                            <label class="col col-form-label">Nombre</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div>
+                            <label class="col-form-label">Apellidos</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div>
+                            <label class="col-form-label">Fecha de nacimiento</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div>
+                            <label class="col-form-label">Número de pasaporte</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div>
+                            <label class="col-form-label">País de pasaporte</label>
+                            <select class="form-select" id="">
+
+                            </select>
+                        </div>
+                        <div>
+                            <label class="col-form-label">Teléfono</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <button class="btn btn-primary mt-4">Agregar Pasajero</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div><br><br>
+        <p>Lista de pasajeros:</p>
+        <div>
+            <div class="pasajeros">
+                <table class="table table-hover">
+                    <!-- Cabezera de la tabla -->
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Fecha de nacimiento</th>
+                            <th>Número de pasaporte</th>
+                            <th>País del pasaporte</th>
+                            <th>Teléfono</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <!-- Cuerpo de la tabla -->
+                    <tbody id="listaPasajeros" style="text-align: center;">
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-danger">Eliminar pasajeros</button>
+        </div>
+
+        <div>
+            <a href="../html/Vuelos.html"><button class="btn btn-outline-primary">Regresar a buscar vuelos</button></a>
+            <button class="btn btn-outline-success">Confirmar reserva</button>
+        </div>
+    </div>
+</body>
+
+</html>

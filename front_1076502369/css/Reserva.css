@@ -1,0 +1,20 @@
+.salida{
+    border: 2px solid black;
+    padding: 30px;
+}
+.regreso{
+    border: 2px solid black;
+    padding: 30px;
+}
+
+.usuarios{
+    border: 2px solid black;
+    padding: 30px;
+}
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+

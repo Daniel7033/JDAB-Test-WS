@@ -1,6 +1,5 @@
 package com.sena.back_1076502369.Entity;
 
-import java.sql.Time;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -17,7 +16,7 @@ public class Schedules extends ABaseEntity{
     private Date date;
 
     @Column(name = "time")
-    private Time time;
+    private Integer time;
 
     @Column(name = "economy_price")
     private Double economyPrice;
@@ -44,11 +43,11 @@ public class Schedules extends ABaseEntity{
         this.date = date;
     }
 
-    public Time getTime() {
+    public Integer getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(Integer time) {
         this.time = time;
     }
 
