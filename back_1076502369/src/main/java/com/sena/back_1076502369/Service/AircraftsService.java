@@ -1,5 +1,6 @@
 package com.sena.back_1076502369.Service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,11 @@ public class AircraftsService extends ABaseService<Aircrafts> implements IAircra
     @Override
     protected IBaseRepository<Aircrafts, Long> getRepository(){
         return repository;
+    }
+
+    @Override
+    public List<Aircrafts> sillasEjecutivas(Integer ejecutivas){
+        return repository.findSillasEjecutivas(ejecutivas);
     }
 
 }
