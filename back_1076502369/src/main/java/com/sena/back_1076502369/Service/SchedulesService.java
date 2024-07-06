@@ -1,12 +1,11 @@
 package com.sena.back_1076502369.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sena.back_1076502369.DTO.IVuelosDto;
 import com.sena.back_1076502369.Entity.Schedules;
 import com.sena.back_1076502369.IRepository.ISchedulesRepository;
 import com.sena.back_1076502369.IRepository.IBaseRepository;
@@ -24,8 +23,8 @@ public class SchedulesService  extends ABaseService<Schedules> implements ISched
     }
 
     @Override
-    public List<IVuelosDto> getReserva(String departure, String arrival, Date salida) {
-        return repository.getReserva(departure, arrival, salida);
+    public List<Schedules> findViajes(Integer destino, Integer salida, LocalDate fechaInicio, LocalDate fechaFin) {
+        return repository.findViajes(destino, salida, fechaInicio, fechaFin);
     }
 
 }
