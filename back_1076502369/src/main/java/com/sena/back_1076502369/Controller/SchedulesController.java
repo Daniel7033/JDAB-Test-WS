@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sena.back_1076502369.Entity.Schedules;
+import com.sena.back_1076502369.DTO.ISchedules;
 import com.sena.back_1076502369.DTO.SchedulesDto;
 import com.sena.back_1076502369.IService.ISchedulesService;
 
@@ -22,7 +23,7 @@ public class SchedulesController extends ABaseController<Schedules, ISchedulesSe
     }
 
     @PostMapping("/findViajes")
-    public ResponseEntity<List<Schedules>> findViajes(@RequestBody SchedulesDto schedules){
+    public ResponseEntity<List<ISchedules>> findViajes(@RequestBody SchedulesDto schedules){
         try{
             return ResponseEntity.ok(service.findViajes(schedules.getDestino(), schedules.getSalida(), schedules.getFechaInicio(), schedules.getFechaFin()));
         } catch (Exception e) {

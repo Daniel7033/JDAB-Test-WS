@@ -1,8 +1,11 @@
 package com.sena.back_1076502369.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sena.back_1076502369.DTO.IOffice;
 import com.sena.back_1076502369.Entity.Office;
 import com.sena.back_1076502369.IRepository.IOfficeRepository;
 import com.sena.back_1076502369.IRepository.IBaseRepository;
@@ -17,5 +20,10 @@ public class OfficeService extends ABaseService<Office> implements IOfficeServic
     @Override
     protected IBaseRepository<Office, Long> getRepository(){
         return repository;
+    }
+
+    @Override
+    public List<IOffice> findOfficeByCountry(String pais, Integer telefono) {
+        return repository.findOfficeByCountry(pais, telefono);
     }
 }

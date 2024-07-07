@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.sena.back_1076502369.DTO.IAircrafts;
 import com.sena.back_1076502369.Entity.Aircrafts;
 
 @Repository
@@ -14,10 +15,10 @@ public interface IAircraftsRepository extends IBaseRepository<Aircrafts, Long>{
     @Query(value = "SELECT " +
         " name, " +
         " total_seats, " +
-        " business_sesats " +
+        " business_seats " +
         " FROM aircrafts " +
-        " WHERE (business_steats IS NULL OR business_steats >= :ejecutivas); " 
+        " WHERE (:ejecutivas IS NULL OR business_seats >= :ejecutivas); " 
     , nativeQuery = true)
-    List<Aircrafts> findSillasEjecutivas(@Param ("ejecutivas") Integer ejecutivas);
+    List<IAircrafts> findSillasEjecutivas(@Param ("ejecutivas") Integer ejecutivas);
 
 }

@@ -1,8 +1,11 @@
 package com.sena.back_1076502369.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sena.back_1076502369.DTO.ICabinType;
 import com.sena.back_1076502369.Entity.CabinTypes;
 import com.sena.back_1076502369.IRepository.ICabinTypesRepository;
 import com.sena.back_1076502369.IRepository.IBaseRepository;
@@ -17,5 +20,10 @@ public class CabinTypeService  extends ABaseService<CabinTypes> implements ICabi
     @Override
     protected IBaseRepository<CabinTypes, Long> getRepository(){
         return repository;
+    }
+
+    @Override
+    public List<ICabinType> findCabinas(String nombre) {
+        return repository.findCabinas(nombre);
     }
 }

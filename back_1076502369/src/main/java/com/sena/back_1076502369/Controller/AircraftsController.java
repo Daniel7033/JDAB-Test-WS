@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sena.back_1076502369.Entity.Aircrafts;
 import com.sena.back_1076502369.DTO.AircraftsDto;
+import com.sena.back_1076502369.DTO.IAircrafts;
 import com.sena.back_1076502369.IService.IAircraftsService;
 
 @CrossOrigin("*")
@@ -21,7 +22,7 @@ public class AircraftsController extends ABaseController<Aircrafts, IAircraftsSe
     }
 
     @PostMapping("/sillasEjecutivas")
-        public ResponseEntity<List<Aircrafts>> sillasEjecutivas(@RequestBody AircraftsDto aircrafts){
+        public ResponseEntity<List<IAircrafts>> sillasEjecutivas(@RequestBody AircraftsDto aircrafts){
             try{
                 return ResponseEntity.ok(service.sillasEjecutivas(aircrafts.getEjecutivas()));
             } catch (Exception e) {
