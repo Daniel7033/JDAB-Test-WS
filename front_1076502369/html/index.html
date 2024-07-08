@@ -85,31 +85,32 @@
                     <div class="input-group">
                         <div>
                             <label class="col col-form-label">Nombre</label>
-                            <input type="text" class="form-control">
+                            <input type="hidden" class="form-control" id="firstName" name="firstName">
+                            <input type="text" class="form-control" id="firstName" name="firstName">
                         </div>
                         <div>
                             <label class="col-form-label">Apellidos</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="lastName" name="lastName">
                         </div>
                         <div>
                             <label class="col-form-label">Fecha de nacimiento</label>
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" id="birthDate" name="birthDate">
                         </div>
                         <div>
                             <label class="col-form-label">Número de pasaporte</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="passportNumber" name="passportNumber">
                         </div>
                         <div>
                             <label class="col-form-label">País de pasaporte</label>
-                            <select class="form-select" id="">
+                            <select class="form-select" id="passportCountryId" name="passportCountryId">
 
                             </select>
                         </div>
                         <div>
                             <label class="col-form-label">Teléfono</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="phone" name="phone">
                         </div>
-                        <button class="btn btn-primary mt-4">Agregar Pasajero</button>
+                        <button onclick="saveUser()" type="button" class="btn btn-primary mt-4">Agregar Pasajero</button>
                     </div>
                 </fieldset>
             </form>

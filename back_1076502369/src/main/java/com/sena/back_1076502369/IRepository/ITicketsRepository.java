@@ -6,5 +6,5 @@ import com.sena.back_1076502369.Entity.Tickets;
 
 @Repository
 public interface ITicketsRepository extends IBaseRepository<Tickets, Long>{
-    
+
 }

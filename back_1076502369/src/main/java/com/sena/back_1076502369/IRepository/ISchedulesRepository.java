@@ -15,7 +15,10 @@ public interface ISchedulesRepository extends IBaseRepository<Schedules, Long> {
         @Query(value = "SELECT " +
                         "r.departure_airport_id, " +
                         "r.arrival_airport_id, " +
-                        " sc.date " +
+                        " sc.date, " +
+                        " sc.time, " +
+                        " sc.flight_number, " +
+                        " sc.economy_price " +
                         "FROM schedules sc " +
                         "INNER JOIN routes r ON sc.route_id = r.id " +
                         "INNER JOIN airports dep ON r.departure_airport_id = dep.id " +
