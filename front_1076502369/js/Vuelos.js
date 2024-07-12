@@ -19,8 +19,8 @@ function loadData() {
                 data.forEach(function (item) {
                     html +=
                         `<tr>
-                        <td>${item.routeId.departure}</td>
-                        <td>${item.routeId.arrival}</td>
+                        <td>${item.departure}</td>
+                        <td>${item.arrival}</td>
                         <td>${item.date}</td>
                         <td>${item.time}</td>
                         <td>${item.flightNumber}</td>
@@ -117,21 +117,15 @@ function loadDestino() {
 function filterData() {
     try {
         var selectOrigen = parseInt($("#selected_departure_airports_id").val());
-        if (isNaN(selectOrigen) || selectOrigen === null) {
-            console.error("ID de ciudad no válido");
-            return;
-        }
+        
         
         var selectDestino = parseInt($("#selected_arrival_airports_id").val());
-        if (isNaN(selectDestino) || selectDestino === null) {
-            console.error("ID de ciudad no válido");
-            return;
-        }
         
-        var origen = { 'id': selectOrigen };
-        var destino = { 'id': selectDestino };
-        var fechaSalida = $('#fechaSalida').val();
-        var fechaRegreso = $('#fechaRegreso').val();
+        
+        var origen = {'departure_airports_id' : { 'id': selectOrigen }}
+        var destino = {'arrival_airports_id' : { 'id': selectDestino }}
+        var fechaSalida = {'fechaSalida' : $('#fechaSalida').val()}
+        var fechaFin = {'fechaFin' : $('#fechaFin').val()}
 
         $.ajax({
             url: "http://localhost:7033/test/v1/api/schedules/findViajes",
@@ -141,7 +135,7 @@ function filterData() {
                 origenId: origen,
                 destinoId: destino,
                 fechaSalida: fechaSalida,
-                fechaRegreso: fechaRegreso
+                fechaFin: fechaFin
             }),
             success: function (response) {
                 if (response) {
@@ -167,8 +161,8 @@ function vuelosIda(data) {
         data.forEach(function (item) {
             html +=
                 `<tr>
-                <td>${item.routeId.departure}</td>
-                <td>${item.routeId.arrival}</td>
+                <td>${item.departure}</td>
+                <td>${item.arrival}</td>
                 <td>${item.date}</td>
                 <td>${item.time}</td>
                 <td>${item.flightNumber}</td>
@@ -224,8 +218,8 @@ function vuelosIda(data) {
                 data.forEach(function (item) {
                     html +=
                         `<tr>
-                            <td>${item.routeId.departure}</td>
-                            <td>${item.routeId.arrival}</td>
+                            <td>${item.departure}</td>
+                            <td>${item.arrival}</td>
                             <td>${item.date}</td>
                             <td>${item.time}</td>
                             <td>${item.flightNumber}</td>
