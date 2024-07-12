@@ -31,11 +31,11 @@ public class Users extends ABaseEntity{
     private Boolean active;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = "role_id")
     private Role roleId;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "office_id", nullable = false)
+    @JoinColumn(name = "office_id")
     private Office officeId;
 
     public String getEmail() {
