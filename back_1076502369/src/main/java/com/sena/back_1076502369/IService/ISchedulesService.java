@@ -8,5 +8,6 @@ import com.sena.back_1076502369.Entity.Schedules;
 
 public interface ISchedulesService extends IBaseService<Schedules>{
     
-    List<ISchedules> findViajes(Integer destino, Integer salida, LocalDate fechaInicio, LocalDate fechaFin);
+    List<ISchedules> findViajes(Integer destino, Integer salida, LocalDate fechaOrigen, LocalDate fechaLlegada);
+    List<ISchedules> findViajesRetorno(Integer salida, LocalDate fechaOrigen, LocalDate fechaLlegada);
 }

@@ -24,8 +24,13 @@ public class SchedulesService  extends ABaseService<Schedules> implements ISched
     }
 
     @Override
-    public List<ISchedules> findViajes(Integer destino, Integer salida, LocalDate fechaInicio, LocalDate fechaFin) {
-        return repository.findViajes(destino, salida, fechaInicio, fechaFin);
+    public List<ISchedules> findViajes(Integer destino, Integer salida, LocalDate fechaOrigen, LocalDate fechaLlegada) {
+        return repository.findViajes(destino, salida, fechaOrigen, fechaLlegada);
+    }
+
+    @Override
+    public List<ISchedules> findViajesRetorno(Integer salida, LocalDate fechaOrigen, LocalDate fechaLlegada) {
+        return repository.findViajesRetorno(salida, fechaOrigen, fechaLlegada);
     }
 
 }

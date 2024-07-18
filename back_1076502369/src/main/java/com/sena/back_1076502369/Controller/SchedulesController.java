@@ -25,7 +25,16 @@ public class SchedulesController extends ABaseController<Schedules, ISchedulesSe
     @PostMapping("/findViajes")
     public ResponseEntity<List<ISchedules>> findViajes(@RequestBody SchedulesDto schedules){
         try{
-            return ResponseEntity.ok(service.findViajes(schedules.getDestino(), schedules.getSalida(), schedules.getFechaInicio(), schedules.getFechaFin()));
+            return ResponseEntity.ok(service.findViajes(schedules.getDestino(), schedules.getSalida(), schedules.getFechaOrigen(), schedules.getFechaLlegada()));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(null);
+        }
+    } 
+    
+    @PostMapping("/findViajesRetorno")
+    public ResponseEntity<List<ISchedules>> findViajesRetorno(@RequestBody SchedulesDto schedules){
+        try{
+            return ResponseEntity.ok(service.findViajesRetorno(schedules.getSalida(), schedules.getFechaOrigen(), schedules.getFechaLlegada()));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(null);
         }

@@ -3,18 +3,18 @@ package com.sena.back_1076502369.DTO;
 import java.time.LocalDate;
 
 public interface ISchedules extends IGenericDto{
-    Integer getDeparture();
-    Integer getArrival();
+    String getDestino();
+    String getSalida();
     Integer getFlightNumber();
-/*     Integer getTotalSillas();
+    Integer getSillasOcupadas();
+    Integer getSillasDisponibles();
+    Double getEconomyPrice();
+    String getTime();
+    LocalDate getDate();
+/*  Integer getTotalSillas();
     Integer getEconomicasDisponibles();
     Integer getEconomicasOcupadas();
     Integer getEjecutivasDisponibles();
-    Integer getEjecutivasOcupadas();
-    Integer getSillasOcupadas();
-    Integer getSillasDisponibles(); */
-    Double getEconomyPrice();
-    String getTime();
-    // String getName();
-    LocalDate getDate();
+    String getName();
+    Integer getEjecutivasOcupadas();*/
 }

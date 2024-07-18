@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/Vuelo.css">
     <link rel="stylesheet" href="../css/global.css">
     <title>Busqueda de vuelos</title>
@@ -24,19 +22,19 @@
                             <div class="col-5">
                                 <label class="col-form-label">Origen</label>
                                 <div class="col-sm-10">
-                                    <input type="hidden" id="selected_departure_airports_id"
-                                        name="selected_departure_airports_id" value="">
-                                    <input type="text" list="departure_airports_id" class="form-control"
-                                        name="departure_airports_id" id="departure_airports_id">
+                                    <input type="hidden" id="selected_departure_airport_id"
+                                        name="selected_departure_airport_id" value="">
+                                    <input type="text" list="departure" class="form-control"
+                                        name="departure" id="departure">
                                 </div>
                             </div>
                             <div class="col-5">
                                 <label class="col-form-label">Destino</label>
                                 <div class="col-sm-10">
-                                    <input type="hidden" id="selected_arrival_airports_id"
-                                        name="selected_arrival_airports_id" value="">
-                                    <input type="text" list="arrival_airports_id" class="form-control"
-                                        name="arrival_airports_id" id="arrival_airports_id">
+                                    <input type="hidden" id="selected_arrival_airport_id"
+                                        name="selected_arrival_airport_id" value="">
+                                    <input type="text" list="arrival" class="form-control"
+                                        name="arrival" id="arrival">
                                 </div>
                             </div>
                             <div class="col-2">
@@ -60,14 +58,14 @@
                             </div>
                             <div class="col-5">
                                 <label for="fechaSalida" class="col-form-label">Fecha Salida</label>
-                                <input type="date" class="form-control" id="fechaSalida" name="date">
+                                <input type="date" class="form-control" id="date" name="date">
                             </div>
                             <div class="col-5">
-                                <label for="fechaFin" class="col-form-label">Fecha Regreso</label>
-                                <input type="date" class="form-control" id="fechaFin" name="date">
+                                <label for="fechaLlegada" class="col-form-label">Fecha Regreso</label>
+                                <input type="date" class="form-control" id="date" name="date">
                             </div>
                         </div>
-                        <button onclick="filterData()" type="button" class="btn btn-primary mt-3">Aplicar</button>
+                        <button onclick="filtro()" type="button" class="btn btn-primary mt-3">Aplicar</button>
                     </fieldset>
                 </form>
             </div>
@@ -85,6 +83,8 @@
                             <th>Hora</th>
                             <th>Número de Vuelo</th>
                             <th>Precio de Cabina</th>
+                            <th>Sillas Ocupadas</th>
+                            <th>Sillas Disponibles</th>
                         </tr>
                     </thead>
                     <!-- Cuerpo de la tabla -->
@@ -95,8 +95,8 @@
         </div><br>
         <div>
             <p>Detalle de vuelos de regreso:</p>
-            <div class="vuelosRegreso">
-                <table id="vuelosRegreso" class="table table-hover">
+            <div class="vuelosRetorno">
+                <table id="vuelosRetorno" class="table table-hover">
 
                     <!-- Cabezera de la tabla -->
                     <thead class="table-dark">
@@ -107,6 +107,8 @@
                             <th>Hora</th>
                             <th>Número de Vuelo</th>
                             <th>Precio de Cabina</th>
+                            <th>Sillas Ocupadas</th>
+                            <th>Sillas Disponibles</th>
                         </tr>
                     </thead>
                     <!-- Cuerpo de la tabla -->
@@ -132,7 +134,7 @@
         </div>
     </div>
 
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -163,7 +165,7 @@
                     },
                 }
             });
-            $('#vuelosRegreso').DataTable({
+            $('#vuelosRetorno').DataTable({
                 "paging": true,
                 "lengthChange": true,
                 "searching": true,

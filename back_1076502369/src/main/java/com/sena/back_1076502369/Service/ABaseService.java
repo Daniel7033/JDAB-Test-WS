@@ -53,7 +53,6 @@ public abstract class ABaseService<T extends ABaseEntity> implements IBaseServic
 
     @Override
     public void delete(Long id) throws Exception {
-
-        getRepository().deleteById(id);;
+        getRepository().deleteById(id);
     }
 }

@@ -33,9 +33,11 @@ public class TicketsService  extends ABaseService<Tickets> implements ITicketsSe
     @Override
     public Tickets saveUser(Users entity) throws Exception{
         Users users = usersService.save(entity);
+        users.setActive(true);
         Tickets tickets = new Tickets();
         tickets.setUserId(users);
-        users.setActive(true);
+        tickets.setFirstName(users.getFirstName());
+        tickets.setLastName(users.getLastName());
         tickets.setConfirmed(true);
         Tickets entityTickets = repository.save(tickets);
         return entityTickets;

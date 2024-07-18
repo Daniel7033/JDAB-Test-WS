@@ -1,18 +1,23 @@
-function loadCountries() {
-    // Realizar la solicitud AJAX
+$(document).ready(function () {
+    // loadCountries()
+    loadPasajeros()
+});
+
+/*  function loadCountries() {
+//    Realizar la solicitud AJAX
     $.ajax({
-        url: 'http://localhost:7033/test/v1/api/countries',
+        url: 'http://localhost:7033/test/v1/api/office',
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-            // Limpiar el selector antes de agregar nuevas opciones
+  //          Limpiar el selector antes de agregar nuevas opciones
             $('#passportCountryId').empty();
 
-            // Crear opciones para el selector
+    //        Crear opciones para el selector
             for (var i = 0; i < data.length; i++) {
                 var option = document.createElement('option');
                 option.value = data[i].id;
-                option.text = data[i].name ;
+                option.text = data[i].name + " - " + data[i].countryId.name;
                 $('#passportCountryId').append(option);
             }
         },
@@ -20,6 +25,42 @@ function loadCountries() {
             console.error('Error al obtener los datos:', error);
         }
     });
+}  */
+
+function save() {
+    return saveUser(), saveTicket();
+}
+
+function saveTicket() {
+    try{
+        var data = {
+            'firstName': $('#firstName').val(),
+            'lastName': $('#lastName').val(),
+            'passportNumber': $('#passportNumber').val(),
+            'passportCountryId':  1 ,
+            'phone': $('#phone').val(),
+            'passportPhoto': $('#passportPhoto').val()
+        }
+        
+        var id = $('#id').val();
+
+        $.ajax({
+            url: 'http://localhost:7033/test/v1/api/tickets/save',
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                loadPasajeros();
+                alert("GUARDADO")
+            },
+            error: function (error) {
+                console.error("ERROR AL AGREGAR PASAJERO. Tipo de error: ", error);
+            }
+        });
+    } catch {
+
+    }
 }
 
 function saveUser() {
@@ -34,8 +75,6 @@ function saveUser() {
             'firstName': $('#firstName').val(),
             'lastName': $('#lastName').val(),
             'birthDate': $('#birthDate').val(),
-            'passportNumber': $('#passportNumber').val(),
-            'passportCountryId': { 'id' : parseInt($("#passportCountryId").val())},
             'phone': $('#phone').val()
         }
 
@@ -49,7 +88,6 @@ function saveUser() {
             data: JSON.stringify(data),
             success: function (response) {
                 var id = response.data.id
-
                 loadPasajeros();
                 alert("GUARDADO")
             },
@@ -64,10 +102,25 @@ function saveUser() {
 
 function loadPasajeros() {
     $.ajax({
-        url: 'http://localhost:7033/test/v1/api/users/',
+        url: 'http://localhost:7033/test/v1/api/tickets',
         method: 'GET',
         dataType: 'json',
-        contentType: 'application/json',
+        success: function (response) {
+            var html = ""
+            if (Array.isArray(data)) {
+                data.forEach(function (item){
+                    html +=
+                    `<tr>
+                        <td>${item.firstName}</td>
+                        <td>${item.lastName}</td>
+                        <td>${item.userId.birthDate}</td>
+                        <td>${item.passportNumber}</td>
+                        <td>${item.officeId.countryId.name}</td>
+                        <td>${item.phone}</td>
+                    </tr>`;
+                })
+            }
+        }
 
     })
 }

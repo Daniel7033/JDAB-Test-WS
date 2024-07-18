@@ -110,7 +110,11 @@
                             <label class="col-form-label">Teléfono</label>
                             <input type="text" class="form-control" id="phone" name="phone">
                         </div>
-                        <button onclick="saveUser()" type="button" class="btn btn-primary mt-4">Agregar Pasajero</button>
+                        <div class="mb-3">
+                            <label for="passportPhoto" class="form-label">Foto de pasaporte</label>
+                            <input class="form-control" type="file" id="passportPhoto">
+                        </div>
+                        <button onclick="save()" type="button" class="btn btn-primary mt-4">Agregar Pasajero</button>
                     </div>
                 </fieldset>
             </form>
@@ -128,7 +132,6 @@
                             <th>Número de pasaporte</th>
                             <th>País del pasaporte</th>
                             <th>Teléfono</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <!-- Cuerpo de la tabla -->
@@ -147,6 +150,3 @@
 </body>
 
 </html>
-<script>
-    loadCountries();
-</script>

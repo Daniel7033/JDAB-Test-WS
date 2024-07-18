@@ -1,38 +1,10 @@
 $(document).ready(function () {
-    loadData();
     loadOrigen();
     loadDestino();
-    vuelosIda();
-    // vuelosRegreso();
 });
 
-function loadData() {
-    console.log("loadData ejecutandose");
-    $.ajax({
-        url: "http://localhost:7033/test/v1/api/schedules",
-        method: "GET",
-        dataType: "json",
-        success: function (response) {
-            var html = ""
-            var data = response.data;
-            if (Array.isArray(data)) {
-                data.forEach(function (item) {
-                    html +=
-                        `<tr>
-                        <td>${item.departure}</td>
-                        <td>${item.arrival}</td>
-                        <td>${item.date}</td>
-                        <td>${item.time}</td>
-                        <td>${item.flightNumber}</td>
-                        <td>${item.economyPrice}</td>
-                </tr>`;
-                });
-            }
-        },
-        error: function (error) {
-            console.error("Error en la solicitud:", error);
-        },
-    });
+function filtro() {
+    return filterDataIda(), filterDataRetorno();
 }
 
 //AUTOCOMPLETE
@@ -45,17 +17,17 @@ function loadOrigen() {
             if (response.status && Array.isArray(response.data)) {
                 var origenes = response.data.map(function (origen) {
                     return {
-                        label: origen.name,
+                        label: `${origen.code} - ${origen.name}`,
                         value: origen.id
                     };
                 });
 
-                $(" #departure_airports_id").autocomplete({
+                $(" #departure").autocomplete({
 
                     source: origenes,
                     select: function (event, ui) {
-                        $("#selected_departure_airports_id").val(ui.item.value);
-                        $("#departure_airports_id").val(ui.item.label);
+                        $("#selected_departure_airport_id").val(ui.item.value);
+                        $("#departure").val(ui.item.label);
                         console.log("ID del aeropuerto destino seleccionada: " + ui.item.value);
                         return false; // Evita la actualización del valor del input después de la selección.
                     }
@@ -80,12 +52,12 @@ function loadDestino() {
             if (response.status && Array.isArray(response.data)) {
                 var destinos = response.data.map(function (destino) {
                     return {
-                        label: destino.name,
+                        label: `${destino.code} - ${destino.name}`,
                         value: destino.id
                     };
                 });
 
-                $("#arrival_airports_id").autocomplete({
+                $("#arrival").autocomplete({
 
                     source: function (request, response) {
                         var results = $.ui.autocomplete.filter(destinos, request.term);
@@ -95,8 +67,8 @@ function loadDestino() {
                         response(results);
                     },
                     select: function (event, ui) {
-                        $("#selected_arrival_airports_id").val(ui.item.value);
-                        $("#arrival_airports_id").val(ui.item.label);
+                        $("#selected_arrival_airport_id").val(ui.item.value);
+                        $("#arrival").val(ui.item.label);
                         console.log("ID del aeropuerto destino seleccionada: " + ui.item.value);
                         return false; // Evita la actualización del valor del input después de la selección.
                     }
@@ -114,33 +86,27 @@ function loadDestino() {
 }
 
 //METODO DE FILTRO
-function filterData() {
+function filterDataIda() {
     try {
-        var selectOrigen = parseInt($("#selected_departure_airports_id").val());
-        
-        
-        var selectDestino = parseInt($("#selected_arrival_airports_id").val());
-        
-        
-        var origen = {'departure_airports_id' : { 'id': selectOrigen }}
-        var destino = {'arrival_airports_id' : { 'id': selectDestino }}
-        var fechaSalida = {'fechaSalida' : $('#fechaSalida').val()}
-        var fechaFin = {'fechaFin' : $('#fechaFin').val()}
+
+        let origen = parseInt($("#selected_departure_airport_id").val())
+        let llegada = parseInt($("#selected_arrival_airport_id").val())
+        let fechaSalida = $('#date').val()
+        let fechaDestino = $('#date').val()
 
         $.ajax({
             url: "http://localhost:7033/test/v1/api/schedules/findViajes",
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify({
-                origenId: origen,
-                destinoId: destino,
-                fechaSalida: fechaSalida,
-                fechaFin: fechaFin
+                salida: origen,
+                destino: llegada,
+                fechaOrigen: fechaSalida,
+                fechaLlegada: fechaDestino
             }),
             success: function (response) {
                 if (response) {
                     vuelosIda(response);
-                    // vuelosRegreso(response);
                 } else {
                     console.error("Error con la tabla de origen", data);
                 }
@@ -150,7 +116,38 @@ function filterData() {
             }
         });
     } catch {
+        //
+    }
+}
 
+function filterDataRetorno() {
+    try {
+
+        let llegada = parseInt($("#selected_arrival_airport_id").val())
+        let fechaSalida = $('#date').val()
+        let fechaDestino = $('#date').val()
+        $.ajax({
+            url: "http://localhost:7033/test/v1/api/schedules/findViajesRetorno",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                salida: llegada,
+                fechaOrigen: fechaSalida,
+                fechaLlegada: fechaDestino
+            }),
+            success: function (response) {
+                if (response) {
+                    vuelosRetorno(response);
+                } else {
+                    console.error("Error con la tabla de origen", data);
+                }
+            },
+            error: function (error) {
+                console.error("ERROR CON LA FUNCION: " + error);
+            }
+        });
+    } catch {
+        //
     }
 }
 
@@ -161,25 +158,21 @@ function vuelosIda(data) {
         data.forEach(function (item) {
             html +=
                 `<tr>
-                <td>${item.departure}</td>
-                <td>${item.arrival}</td>
+                <td>${item.salida}</td>
+                <td>${item.destino}</td>
                 <td>${item.date}</td>
                 <td>${item.time}</td>
                 <td>${item.flightNumber}</td>
                 <td>${item.economyPrice}</td>
+                <td>${item.sillasOcupadas}</td>
+                <td>${item.sillasDisponibles}</td>
             </tr>`;
         });
     } else {
         console.error("ERROR CON LOS DATOS FILTRADOS");
     }
-    // $("#tablaIda").html(html);
-
-    // $("#tablaIda").show();
-    // $("#tablaRegreso").hide();
-    // console.error("Error con la tabla de destino", data);
 
     $("#tablaIda").html(html);
-
     $("#tablaIda tr").click(function () {
         $("#tablaIda tr").removeClass("selected");
         $(this).addClass("selected");
@@ -188,62 +181,29 @@ function vuelosIda(data) {
 
 
 
-/* function vuelosRegreso() {
-
-
-
-    var origen = parseInt($('#departure_airports_id').val());
-    var destino = parseInt($('#arrival_airports_id').val());
-    var fechaSalida = $('#fechaSalida').val();
-    var fechaRegreso = $('#fechaRegreso').val();
-
-    var data = {
-        origenId: origen,
-        destinoId: destino,
-        fechaSalida: fechaSalida,
-        fechaRegreso: fechaRegreso
+function vuelosRetorno(data) {
+    var html = ""
+    if (Array.isArray(data)) {
+        data.forEach(function (item) {
+            html +=
+                `<tr>
+                <td>${item.salida}</td> 
+                <td>${item.destino}</td>
+                <td>${item.date}</td>
+                <td>${item.time}</td>
+                <td>${item.flightNumber}</td>
+                <td>${item.economyPrice}</td>
+                <td>${item.sillasOcupadas}</td>
+                <td>${item.sillasDisponibles}</td>
+            </tr>`;
+        });
+    } else {
+        console.error("Error con la tabla de destino", data);
     }
 
-    console.log("vuelos regreso: ", data);
-    $.ajax({
-        url: "http://localhost:7033/test/v1/api/schedules/findViajes",
-        method: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(data),
-        dataType: "json",
-        success: function (response) {
-            var html = ""
-            var data = response.data;
-            if (Array.isArray(data)) {
-                data.forEach(function (item) {
-                    html +=
-                        `<tr>
-                            <td>${item.departure}</td>
-                            <td>${item.arrival}</td>
-                            <td>${item.date}</td>
-                            <td>${item.time}</td>
-                            <td>${item.flightNumber}</td>
-                            <td>${item.economyPrice}</td>
-                        </tr>`;
-                });
-            } else {
-                console.error("Error con la tabla de destino", data);
-            }
-            // $("#tablaRegreso").html(html);
-
-            // $("#tablaRegreso tr").click(function () {
-            //     $("#tablaRegreso tr").removeClass("selected");
-            //     $(this).addClass("selected");
-            // });
-            $("#tablaIda").html(html);
-
-            $("#tablaIda").show();
-            $("#tablaRegreso").hide();
-
-        },
-        error: function (error) {
-            console.error("Error en la solicitud", error);
-        }
-
+    $("#tablaRegreso").html(html);
+    $("#tablaRegreso tr").click(function () {
+        $("#tablaRegreso tr").removeClass("selected");
+        $(this).addClass("selected");
     });
-} */
+}

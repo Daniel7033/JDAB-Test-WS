@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class SchedulesDto {
     Integer destino;
     Integer salida;
-    LocalDate fechaInicio;
-    LocalDate fechaFin;
+    LocalDate fechaOrigen;
+    LocalDate fechaLlegada;
     
     //Encapsulamiento...
     //Getter
@@ -18,12 +18,12 @@ public class SchedulesDto {
         return salida;
     }
 
-    public LocalDate getFechaInicio(){
-        return fechaInicio;
+    public LocalDate getFechaOrigen(){
+        return fechaOrigen;
     }
 
-    public LocalDate getFechaFin(){
-        return fechaFin;
+    public LocalDate getFechaLlegada(){
+        return fechaLlegada;
     }
 
     //Setter
@@ -35,12 +35,12 @@ public class SchedulesDto {
         this.salida = salida;
     }
 
-    public void setFechaInicio(LocalDate fechaInicio){
-        this.fechaInicio = fechaInicio;
+    public void setFechaOrigen(LocalDate fechaOrigen){
+        this.fechaOrigen = fechaOrigen;
     }
 
-    public void setFechaFin(LocalDate fechaFin){
-        this.fechaFin = fechaFin;
+    public void setFechaLlegada(LocalDate fechaLlegada){
+        this.fechaLlegada = fechaLlegada;
     }
 }
 

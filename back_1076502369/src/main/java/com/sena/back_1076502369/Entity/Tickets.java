@@ -24,10 +24,7 @@ public class Tickets extends ABaseEntity {
     
     @Column(name = "passport_number")
     private String passportNumber;
-    
-    @Column(name = "passport_country_id")
-    private String passportCountryId;
-    
+        
     @Column(name = "passport_photo")
     private String passportPhoto;
     
@@ -44,6 +41,10 @@ public class Tickets extends ABaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "schedule_id")
     private Schedules scheduleId;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "passport_country_id")
+    private Office passportCountryId;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cabintype_id")
